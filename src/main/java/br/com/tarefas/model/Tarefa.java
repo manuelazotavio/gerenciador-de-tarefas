@@ -1,19 +1,35 @@
 package br.com.tarefas.model;
 
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "tarefas")
 public class Tarefa {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String titulo;
     private String descricao;
+
+    @Enumerated(EnumType.STRING)
     private Prioridade prioridade;
+
     private boolean concluida;
 
+    public Tarefa() {
+    }
 
-    public Tarefa(String titulo, String descricao, Prioridade prioridade, boolean concluida){
+    public Tarefa(String titulo, String descricao, Prioridade prioridade, boolean concluida) {
         this.titulo = titulo;
         this.descricao = descricao;
         this.prioridade = prioridade;
         this.concluida = false;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getTitulo() {

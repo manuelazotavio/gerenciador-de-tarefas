@@ -1,7 +1,10 @@
 package br.com.tarefas.controller;
 
+import br.com.tarefas.dto.TarefaRequestDTO;
+import br.com.tarefas.dto.TarefaResponseDTO;
 import br.com.tarefas.model.Tarefa;
 import br.com.tarefas.service.GerenciadorTarefas;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,12 +19,12 @@ public class TarefaController {
     }
 
     @GetMapping
-    public List<Tarefa> getTarefas(){
+    public List<TarefaResponseDTO> listar(){
         return gerenciador.listar();
     }
 
     @PostMapping
-    public void criarTarefa(@RequestBody Tarefa tarefa){
-        gerenciador.adicionarTarefa(tarefa);
+    public TarefaResponseDTO criar(@RequestBody @Valid TarefaRequestDTO dto){
+        return gerenciador.adicionarTarefa(dto);
     }
 }
